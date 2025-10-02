@@ -1,3 +1,4 @@
+// app/(client)/cart/page.tsx
 "use client";
 
 import Container from "@/components/Container";
@@ -6,6 +7,7 @@ import Loading from "@/components/Loading";
 import NoAccessToCart from "@/components/NoAccessToCart";
 import PriceFormatter from "@/components/PriceFormatter";
 import QuantityButton from "@/components/QuantityButton";
+import ProceedToCheckoutButton from "@/components/ProceedToCheckoutButton";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -14,8 +16,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 import { urlFor } from "@/sanity/lib/image";
 import useCartStore from "@/store";
@@ -69,11 +69,16 @@ export default function Cartpage() {
   useEffect(() => {
     if (user && !hasPrefilledPhone.current) {
       const userPhone = user.primaryPhoneNumber?.phoneNumber;
-      if (userPhone && !shippingAddress.phone) {
-        setShippingAddress((prev) => ({
-          ...prev,
-          phone: userPhone,
-        }));
+      if (userPhone) {
+        setShippingAddress((prev) => {
+          if (!prev.phone) {
+            return {
+              ...prev,
+              phone: userPhone,
+            };
+          }
+          return prev;
+        });
         hasPrefilledPhone.current = true;
       }
     }
@@ -94,15 +99,24 @@ export default function Cartpage() {
     toast.success("Product deleted successfully");
   };
 
-  // In your cart page, update the handleWhatsAppOrder function:
+  // ✅ Improved validation with better error messages
   const handleWhatsAppOrder = () => {
-    if (
-      !shippingAddress.street ||
-      !shippingAddress.city ||
-      !shippingAddress.state ||
-      !shippingAddress.phone
-    ) {
-      toast.error("Please fill in all shipping address fields");
+    const missingFields = [];
+
+    if (!shippingAddress.street?.trim()) missingFields.push("Street Address");
+    if (!shippingAddress.city?.trim()) missingFields.push("City");
+    if (!shippingAddress.state?.trim()) missingFields.push("State/Region");
+    if (!shippingAddress.phone?.trim()) missingFields.push("Phone Number");
+
+    if (missingFields.length > 0) {
+      toast.error(`Please fill in: ${missingFields.join(", ")}`);
+      return;
+    }
+
+    // Validate phone number format (basic validation)
+    const phoneRegex = /^\+?[\d\s-()]+$/;
+    if (!phoneRegex.test(shippingAddress.phone)) {
+      toast.error("Please enter a valid phone number");
       return;
     }
 
@@ -126,7 +140,7 @@ export default function Cartpage() {
     const orderDetails = cartProducts
       .map(
         (item) =>
-          `• ${item.product.name} (${item.product.variant}) - Qty: ${item.quantity} - GHS ${(item.product.price * item.quantity).toFixed(2)}`
+          `• ${item.product.name} (${item.product.variant}) - Qty: ${item.quantity} - GHS ${((item.product.price || 0) * item.quantity).toFixed(2)}`
       )
       .join("\n");
 
@@ -181,7 +195,7 @@ Please confirm this order and provide delivery details.`;
     }, 1000);
   };
 
-  // Use useCallback to prevent unnecessary re-renders
+  // ✅ Use useCallback to prevent unnecessary re-renders
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -193,149 +207,8 @@ Please confirm this order and provide delivery details.`;
     []
   );
 
-  // Memoize the form component to prevent re-renders
-  const ShippingAddressForm = React.memo(() => (
-    <div className="space-y-4">
-      <div>
-        <Label htmlFor="street" className="text-sm font-medium">
-          Street Address *
-        </Label>
-        <Input
-          id="street"
-          name="street"
-          value={shippingAddress.street}
-          onChange={handleInputChange}
-          placeholder="Enter your street address"
-          required
-          className="mt-1"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor="city" className="text-sm font-medium">
-            City *
-          </Label>
-          <Input
-            id="city"
-            name="city"
-            value={shippingAddress.city}
-            onChange={handleInputChange}
-            placeholder="City"
-            required
-            className="mt-1"
-          />
-        </div>
-        <div>
-          <Label htmlFor="state" className="text-sm font-medium">
-            State/Region *
-          </Label>
-          <Input
-            id="state"
-            name="state"
-            value={shippingAddress.state}
-            onChange={handleInputChange}
-            placeholder="State/Region"
-            required
-            className="mt-1"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor="country" className="text-sm font-medium">
-            Country
-          </Label>
-          <Input
-            id="country"
-            name="country"
-            value={shippingAddress.country}
-            onChange={handleInputChange}
-            placeholder="Country"
-            className="mt-1 bg-gray-50"
-            disabled
-          />
-        </div>
-        <div>
-          <Label htmlFor="phone" className="text-sm font-medium">
-            Phone Number *
-          </Label>
-          <Input
-            id="phone"
-            name="phone"
-            value={shippingAddress.phone}
-            onChange={handleInputChange}
-            placeholder="+233 XX XXX XXXX"
-            required
-            className="mt-1"
-          />
-        </div>
-      </div>
-    </div>
-  ));
-
-  ShippingAddressForm.displayName = "ShippingAddressForm";
-
-  const ProceedToCheckoutButton = () => {
-    if (!showCheckoutForm) {
-      return (
-        <Button
-          className="w-full mt-6 font-semibold cursor-pointer bg-green-600 hover:bg-green-700 text-white"
-          onClick={() => setShowCheckoutForm(true)}
-          size="lg"
-        >
-          Proceed to Checkout
-        </Button>
-      );
-    }
-
-    return (
-      <div className="mt-6 space-y-4">
-        <div className="bg-green-50 p-4 rounded-lg">
-          <h3 className="font-semibold text-lg text-green-900">
-            Shipping Information
-          </h3>
-          <p className="text-sm text-green-700 mt-1">
-            Please provide your shipping details for order delivery
-          </p>
-        </div>
-
-        <ShippingAddressForm />
-
-        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-          <div className="flex items-center gap-3 mb-2">
-            <MessageCircle className="w-5 h-5 text-green-600" />
-            <h4 className="font-semibold text-green-800">
-              WhatsApp Order Confirmation
-            </h4>
-          </div>
-          <p className="text-sm text-green-700">
-            After filling your details, click the button below to confirm your
-            order via WhatsApp. You&apos;ll pay when your order is delivered.
-          </p>
-        </div>
-
-        <div className="flex gap-3 pt-4">
-          <Button
-            variant="outline"
-            className="flex-1 cursor-pointer"
-            onClick={() => setShowCheckoutForm(false)}
-          >
-            Back to Cart
-          </Button>
-          <Button
-            className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer"
-            onClick={handleWhatsAppOrder}
-            size="lg"
-          >
-            <MessageCircle className="w-5 h-5 mr-2" />
-            Confirm Order via WhatsApp
-          </Button>
-        </div>
-      </div>
-    );
-  };
+  const handleShowForm = () => setShowCheckoutForm(true);
+  const handleHideForm = () => setShowCheckoutForm(false);
 
   // Render loading state until client-side
   if (!isClient) {
@@ -487,7 +360,15 @@ Please confirm this order and provide delivery details.`;
                         </div>
                       </div>
 
-                      <ProceedToCheckoutButton />
+                      {/* ✅ Use the external ProceedToCheckoutButton component */}
+                      <ProceedToCheckoutButton
+                        showCheckoutForm={showCheckoutForm}
+                        shippingAddress={shippingAddress}
+                        onShowForm={handleShowForm}
+                        onHideForm={handleHideForm}
+                        onConfirmOrder={handleWhatsAppOrder}
+                        onInputChange={handleInputChange}
+                      />
 
                       {/* WhatsApp Order Info */}
                       <div className="mt-6 space-y-3">
@@ -517,7 +398,7 @@ Please confirm this order and provide delivery details.`;
                   </div>
                   <Button
                     className="bg-green-600 hover:bg-green-700 font-semibold text-white"
-                    onClick={() => setShowCheckoutForm(true)}
+                    onClick={handleShowForm}
                     size="lg"
                   >
                     Checkout

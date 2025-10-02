@@ -1,16 +1,9 @@
 import React from "react";
 import { Tooltip, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import Link from "next/link";
-import {
-  FacebookIcon,
-  Icon,
-  Instagram,
-  InstagramIcon,
-  XIcon,
-} from "lucide-react";
+import { FacebookIcon, InstagramIcon, XIcon } from "lucide-react";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 import { cn } from "@/lib/utils";
-import { title } from "process";
 
 interface Props {
   className?: string;

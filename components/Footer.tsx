@@ -6,7 +6,6 @@ import SocialMedia from "./SocialMedia";
 import { Input } from "./ui/input";
 import { categoriesData, quickLinksData } from "@/constant";
 import Link from "next/link";
-import { title } from "process";
 
 export default function Footer() {
   return (

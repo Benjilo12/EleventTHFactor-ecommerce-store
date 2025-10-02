@@ -198,12 +198,16 @@ export default function OrdersPage() {
                               </div>
                               <div className="text-sm text-gray-600">
                                 Qty: {item.quantity} ×{" "}
-                                <PriceFormatter amount={item.product.price} />
+                                <PriceFormatter
+                                  amount={item.product.price || 0}
+                                />
                               </div>
                             </div>
                             <div className="font-semibold">
                               <PriceFormatter
-                                amount={item.product.price * item.quantity}
+                                amount={
+                                  (item.product.price || 0) * item.quantity
+                                }
                               />
                             </div>
                           </div>

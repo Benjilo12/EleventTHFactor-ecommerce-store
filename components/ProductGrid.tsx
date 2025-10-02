@@ -13,10 +13,11 @@ export default function ProductGrid() {
   const [selectedTab, setSelectedTab] = useState(productType[0]?.title || "");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const query = `*[_type == 'product' && variant ==$variant] | order(name desc)`;
-  const params = { variant: selectedTab.toLocaleLowerCase() };
 
   useEffect(() => {
+    const query = `*[_type == 'product' && variant ==$variant] | order(name desc)`;
+    const params = { variant: selectedTab.toLocaleLowerCase() };
+
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -30,6 +31,7 @@ export default function ProductGrid() {
     };
     fetchData();
   }, [selectedTab]);
+
   return (
     <div className=" flex-col items-center justify-center">
       <HomeTabbar selectedTab={selectedTab} onTabSelect={setSelectedTab} />

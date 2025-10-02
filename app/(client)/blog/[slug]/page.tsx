@@ -5,28 +5,26 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-import { PortableTextBlock } from "sanity";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-// ✅ Blog Detail Page
 export default async function BlogSlugPage({ params }: Props) {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
 
   if (!blog) return notFound();
 
-  const blocks = Array.isArray(blog.content)
-    ? (blog.content as PortableTextBlock[])
-    : [];
+  const blocks = Array.isArray(blog.content) ? blog.content : [];
 
-  const wordCount = blocks.reduce((acc, block) => {
-    if (block._type === "block") {
+  const wordCount = blocks.reduce((acc: number, block: any) => {
+    if (block._type === "block" && block.children) {
       const text =
         block.children
-          ?.map((child) => (typeof child.text === "string" ? child.text : ""))
+          ?.map((child: any) =>
+            typeof child.text === "string" ? child.text : ""
+          )
           .join(" ") || "";
       return acc + text.trim().split(/\s+/).length;
     }
@@ -79,7 +77,14 @@ export default async function BlogSlugPage({ params }: Props) {
             [&>em]:italic
           "
         >
-          <PortableText value={blog.content} />
+          {/* ✅ Add null/empty check for blog.content */}
+          {blog.content &&
+          Array.isArray(blog.content) &&
+          blog.content.length > 0 ? (
+            <PortableText value={blog.content} />
+          ) : (
+            <p className="text-gray-500 italic">No content available.</p>
+          )}
         </div>
       </div>
     </>

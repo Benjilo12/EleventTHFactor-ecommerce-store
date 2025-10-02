@@ -35,7 +35,7 @@ export default async function SingleProductPage({
 
   return (
     <Container className="py-10 flex flex-col md:flex-row gap-10 overflow-hidden">
-      {product?.images && <ImageView images={product?.images}>Left</ImageView>}
+      {product?.images && <ImageView images={product?.images} />}
       <div className="w-full md:w-1/2 flex flex-col gap-5">
         <div>
           <h2 className="md:text-4xl font-bold mb-2 text-3xl">
