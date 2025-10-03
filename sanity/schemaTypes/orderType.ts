@@ -11,7 +11,6 @@ export const orderType = defineType({
       name: "orderId",
       title: "Order ID",
       type: "string",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "clerkUserId",
@@ -23,13 +22,11 @@ export const orderType = defineType({
       name: "customerEmail",
       title: "Customer Email",
       type: "string",
-      validation: (Rule) => Rule.required().email(),
     }),
     defineField({
       name: "customerName",
       title: "Customer Name",
       type: "string",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "items",
@@ -49,7 +46,6 @@ export const orderType = defineType({
               name: "quantity",
               title: "Quantity",
               type: "number",
-              validation: (Rule) => Rule.min(1),
             }),
             defineField({
               name: "price",
@@ -74,7 +70,6 @@ export const orderType = defineType({
       name: "totalAmount",
       title: "Total Amount (GHS)",
       type: "number",
-      validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
       name: "status",
@@ -167,7 +162,12 @@ export const orderType = defineType({
       amount: "totalAmount",
       status: "status",
     },
-    prepare(selection) {
+    prepare(selection: {
+      title: any;
+      subtitle: any;
+      amount: any;
+      status: any;
+    }) {
       const { title, subtitle, amount, status } = selection;
       return {
         title: `Order: ${title}`,

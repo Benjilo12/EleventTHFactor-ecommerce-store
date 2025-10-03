@@ -8,6 +8,8 @@ import { categoriesData, quickLinksData } from "@/constant";
 import Link from "next/link";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-white border-t">
       <Container>
@@ -73,6 +75,35 @@ export default function Footer() {
                 Subscribe
               </button>
             </form>
+          </div>
+        </div>
+
+        {/* Copyright Section */}
+        <div className="border-t border-gray-200 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-500 text-sm">
+              © {currentYear} EleventhFactor. All rights reserved.
+            </p>
+            <div className="flex flex-wrap gap-4 md:gap-6">
+              <Link
+                href="/privacy"
+                className="text-gray-500 hover:text-black text-sm transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="text-gray-500 hover:text-black text-sm transition-colors"
+              >
+                Terms of Service
+              </Link>
+              <Link
+                href="/faq"
+                className="text-gray-500 hover:text-black text-sm transition-colors"
+              >
+                faqs
+              </Link>
+            </div>
           </div>
         </div>
       </Container>

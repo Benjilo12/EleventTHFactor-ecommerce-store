@@ -14,7 +14,7 @@ export default async function Categorypage({
   const categories = await getAllCategories();
   return (
     <>
-      <TopBanner title="Category" />
+      <TopBanner title="Categories" />
       <Container className="py-15 ">
         <Title className="text-xl font-bold">
           Products by Category{" "}
