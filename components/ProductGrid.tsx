@@ -47,7 +47,13 @@ export default function ProductGrid() {
       ) : (
         <>
           {products?.length ? (
-            <div className="grid grid-cols md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5 w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="grid grid-cols md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5 w-full"
+            >
               {products.map((product: Product) => (
                 <AnimatePresence key={product?._id}>
                   <motion.div
@@ -60,7 +66,7 @@ export default function ProductGrid() {
                   </motion.div>
                 </AnimatePresence>
               ))}
-            </div>
+            </motion.div>
           ) : (
             <NoProduct
               selectedTab={selectedTab}

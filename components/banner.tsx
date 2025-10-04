@@ -2,13 +2,19 @@
 
 "use client";
 
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 import Link from "next/link";
 import Container from "@/components/Container";
 
 export default function Banner() {
   return (
-    <div className="relative mt-20 h-[40vh] md:h-[70vh] bg-[#4b2e2e] overflow-hidden rounded-2xl">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }} // Start hidden and below
+      whileInView={{ opacity: 1, y: 0 }} // Animate to visible and original position
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className="relative mt-20 h-[40vh] md:h-[70vh] bg-[#4b2e2e] overflow-hidden rounded-2xl"
+    >
       {/* Video background - hidden on mobile */}
       <video
         autoPlay
@@ -40,6 +46,6 @@ export default function Banner() {
           </motion.button>
         </Link>
       </Container>
-    </div>
+    </motion.div>
   );
 }

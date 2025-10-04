@@ -7,6 +7,7 @@ import { BLOGS_QUERYResult } from "@/sanity.types";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { motion } from "framer-motion";
 
 const responsive = {
   desktop: {
@@ -29,7 +30,13 @@ type Props = {
 
 const BlogCarousel: React.FC<Props> = ({ blogs }) => {
   return (
-    <div className="py-10 px-4 md:px-10">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }} // Start hidden and below
+      whileInView={{ opacity: 1, y: 0 }} // Animate to visible and original position
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className="py-10 px-4 md:px-10"
+    >
       <h2 className="text-3xl font-semibold mb-8 text-center">
         Latest Blog Posts
       </h2>
@@ -74,7 +81,7 @@ const BlogCarousel: React.FC<Props> = ({ blogs }) => {
           );
         })}
       </Carousel>
-    </div>
+    </motion.div>
   );
 };
 

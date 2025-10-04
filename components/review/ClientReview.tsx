@@ -4,7 +4,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ReviewCard from "./ReviewCard";
-
+import { motion } from "framer-motion";
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1224 },
@@ -26,13 +26,25 @@ const responsive = {
 export default function ClientReview() {
   return (
     <section className="py-16 bg-gray-50 dark:bg-black">
-      <div className="text-center mb-12">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }} // Start hidden and below
+        whileInView={{ opacity: 1, y: 0 }} // Animate to visible and original position
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="text-center mb-12"
+      >
         <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-800 dark:text-white">
           What People Say About Us
         </h1>
-      </div>
+      </motion.div>
 
-      <div className="w-[90%] md:w-[85%] mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }} // Start hidden and below
+        whileInView={{ opacity: 1, y: 0 }} // Animate to visible and original position
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="w-[90%] md:w-[85%] mx-auto"
+      >
         <Carousel
           showDots={true}
           responsive={responsive}
@@ -69,7 +81,7 @@ export default function ClientReview() {
             reviewText="I ordered two Kaftans for a wedding and got so many compliments. The fabric, the finish — everything was on point. Highly recommended!"
           />
         </Carousel>
-      </div>
+      </motion.div>
     </section>
   );
 }

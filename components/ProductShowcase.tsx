@@ -2,11 +2,18 @@
 
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function ProductShowcase() {
   return (
     <section className="py-16 bg-white dark:bg-black">
-      <div className="w-[90%] md:w-[85%] mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }} // Start hidden and below
+        whileInView={{ opacity: 1, y: 0 }} // Animate to visible and original position
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="w-[90%] md:w-[85%] mx-auto grid md:grid-cols-2 gap-10 items-center"
+      >
         {/* Left Text Section */}
         <div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
@@ -59,11 +66,11 @@ export default function ProductShowcase() {
               Different Types
             </h3>
             <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
-              Over 300+ Designs
+              Over 40+ Designs
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
