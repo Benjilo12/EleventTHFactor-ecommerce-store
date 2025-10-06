@@ -18,7 +18,7 @@ export default function Faqspage() {
     <>
       <TopBanner title="FAQ" />
 
-      <Container className="max-w-4xl sm:px-6 lg:px-8 py-12 h-[80vh]">
+      <Container className="max-w-4xl sm:px-6 lg:px-8 py-12 ">
         <Title className="text-3xl mt-6">Frequently Asked Questions</Title>
 
         <Accordion
