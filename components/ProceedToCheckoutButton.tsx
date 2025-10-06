@@ -22,7 +22,7 @@ interface ProceedToCheckoutButtonProps {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-// ShippingAddressForm component (moved here to keep it together)
+// ShippingAddressForm component
 const ShippingAddressForm = React.memo(
   ({
     shippingAddress,
@@ -31,7 +31,7 @@ const ShippingAddressForm = React.memo(
     shippingAddress: ShippingAddress;
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }) => (
-    <div className="space-y-4">
+    <div className="space-y-3 md:space-y-4">
       <div>
         <label htmlFor="street" className="text-sm font-medium">
           Street Address *
@@ -43,11 +43,11 @@ const ShippingAddressForm = React.memo(
           onChange={onInputChange}
           placeholder="Enter your street address"
           required
-          className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm md:text-base"
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
         <div>
           <label htmlFor="city" className="text-sm font-medium">
             City *
@@ -59,7 +59,7 @@ const ShippingAddressForm = React.memo(
             onChange={onInputChange}
             placeholder="City"
             required
-            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm md:text-base"
           />
         </div>
         <div>
@@ -73,12 +73,12 @@ const ShippingAddressForm = React.memo(
             onChange={onInputChange}
             placeholder="State/Region"
             required
-            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm md:text-base"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
         <div>
           <label htmlFor="country" className="text-sm font-medium">
             Country
@@ -89,7 +89,7 @@ const ShippingAddressForm = React.memo(
             value={shippingAddress.country}
             onChange={onInputChange}
             placeholder="Country"
-            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm md:text-base"
             disabled
           />
         </div>
@@ -104,7 +104,7 @@ const ShippingAddressForm = React.memo(
             onChange={onInputChange}
             placeholder="+233 XX XXX XXXX"
             required
-            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm md:text-base"
           />
         </div>
       </div>
@@ -125,7 +125,7 @@ export default function ProceedToCheckoutButton({
   if (!showCheckoutForm) {
     return (
       <Button
-        className="w-full mt-6 font-semibold cursor-pointer bg-green-600 hover:bg-green-700 text-white"
+        className="w-full mt-4 md:mt-6 font-semibold cursor-pointer bg-green-600 hover:bg-green-700 text-white py-3 text-sm md:text-base"
         onClick={onShowForm}
         size="lg"
       >
@@ -135,12 +135,12 @@ export default function ProceedToCheckoutButton({
   }
 
   return (
-    <div className="mt-6 space-y-4">
-      <div className="bg-green-50 p-4 rounded-lg">
-        <h3 className="font-semibold text-lg text-green-900">
+    <div className="mt-4 md:mt-6 space-y-4">
+      <div className="bg-green-50 p-3 md:p-4 rounded-lg">
+        <h3 className="font-semibold text-base md:text-lg text-green-900">
           Shipping Information
         </h3>
-        <p className="text-sm text-green-700 mt-1">
+        <p className="text-xs md:text-sm text-green-700 mt-1">
           Please provide your shipping details for order delivery
         </p>
       </div>
@@ -150,34 +150,34 @@ export default function ProceedToCheckoutButton({
         onInputChange={onInputChange}
       />
 
-      <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-        <div className="flex items-center gap-3 mb-2">
-          <MessageCircle className="w-5 h-5 text-green-600" />
-          <h4 className="font-semibold text-green-800">
+      <div className="bg-green-50 p-3 md:p-4 rounded-lg border border-green-200">
+        <div className="flex items-center gap-2 md:gap-3 mb-2">
+          <MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600" />
+          <h4 className="font-semibold text-sm md:text-base text-green-800">
             WhatsApp Order Confirmation
           </h4>
         </div>
-        <p className="text-sm text-green-700">
+        <p className="text-xs md:text-sm text-green-700">
           After filling your details, click the button below to confirm your
           order via WhatsApp. You&apos;ll pay when your order is delivered.
         </p>
       </div>
 
-      <div className="flex gap-3 pt-4">
+      <div className="flex flex-col sm:flex-row gap-2 md:gap-3 pt-2 md:pt-4">
         <Button
           variant="outline"
-          className="flex-1 cursor-pointer"
+          className="flex-1 cursor-pointer py-2 md:py-3 text-sm md:text-base"
           onClick={onHideForm}
         >
           Back to Cart
         </Button>
         <Button
-          className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer"
+          className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer py-2 md:py-3 text-sm md:text-base"
           onClick={onConfirmOrder}
           size="lg"
         >
-          <MessageCircle className="w-5 h-5 mr-2" />
-          Confirm Order via WhatsApp
+          <MessageCircle className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+          Confirm via WhatsApp
         </Button>
       </div>
     </div>

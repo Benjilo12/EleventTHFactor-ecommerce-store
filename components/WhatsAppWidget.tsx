@@ -5,53 +5,58 @@ import { FloatingWhatsApp } from "react-floating-whatsapp";
 
 const WhatsAppWidget: React.FC = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [widgetKey, setWidgetKey] = useState<number>(0);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleResize = () => {
+    setIsMounted(true);
+
+    const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-
-      // Force re-render on resize to apply mobile/desktop differences
-      setWidgetKey((prev) => prev + 1);
     };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Don't render until mounted to avoid hydration issues
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <FloatingWhatsApp
-      key={widgetKey} // Force re-render on resize
       phoneNumber="233265056031"
       accountName="EleventTHFactor"
       avatar="/logo.jpeg"
       statusMessage="Typically replies in a few minutes"
       chatMessage="Hi there! 👋 How can we help you?"
       placeholder="Type a message..."
+      // Core functionality props
       allowEsc={true}
       allowClickAway={false}
-      notification={true}
-      notificationDelay={30000} // Show notification after 30 seconds
-      notificationSound={true}
+      notification={!isMobile} // Disable notification on mobile
+      notificationDelay={30000}
+      notificationSound={!isMobile} // Disable sound on mobile
+      // Style configuration - only using valid props
+      buttonStyle={{
+        bottom: isMobile ? "80px" : "30px",
+        right: isMobile ? "20px" : "30px",
+        width: isMobile ? "50px" : "60px",
+        height: isMobile ? "50px" : "60px",
+        zIndex: 9999,
+      }}
+      // Chat box style
+      chatboxStyle={{
+        bottom: isMobile ? "140px" : "110px",
+        right: isMobile ? "20px" : "30px",
+        width: isMobile ? "300px" : "350px",
+        zIndex: 9998,
+      }}
+      // Only use valid props that exist in the library
       darkMode={false}
-      // Mobile-specific props
-      {...(isMobile && {
-        notification: false, // Disable notification on mobile
-        buttonStyle: {
-          bottom: "20px",
-          right: "20px",
-        },
-      })}
-      // Desktop-specific props
-      {...(!isMobile && {
-        notification: true,
-        buttonStyle: {
-          bottom: "30px",
-          right: "30px",
-        },
-      })}
     />
   );
 };

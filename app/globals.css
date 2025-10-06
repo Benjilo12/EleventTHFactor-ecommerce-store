@@ -129,3 +129,46 @@
 body {
   font-family: var(--font-raleway);
 }
+
+/* Fix for Floating WhatsApp on mobile */
+.floating-whatsapp {
+  z-index: 9999 !important;
+}
+
+.floating-whatsapp__button {
+  z-index: 10000 !important;
+}
+
+.floating-whatsapp__chatbox {
+  z-index: 9998 !important;
+}
+
+/* Prevent chatbox from closing when input is focused on mobile */
+.floating-whatsapp__chatbox:focus-within {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  .floating-whatsapp__chatbox {
+    position: fixed !important;
+    bottom: 140px !important;
+    right: 20px !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  .floating-whatsapp__button {
+    position: fixed !important;
+    bottom: 80px !important;
+    right: 20px !important;
+  }
+
+  /* Ensure input is easily tappable on mobile */
+  .floating-whatsapp__input {
+    min-height: 44px !important; /* Minimum touch target size */
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+}

@@ -9,13 +9,13 @@ interface Props {
 
 export default function Logo({ children, className }: Props) {
   return (
-    <Link href="/" className="flex items-center gap-2 sm:gap-3">
+    <Link href="/" className="flex items-center gap-1 sm:gap-1">
       <Image
-        src="/logo.jpeg"
+        src="/logo1.png"
         alt="logo"
-        width={32}
-        height={32}
-        className="md:w-10 md:h-10 w-6 h-6"
+        width={62}
+        height={62}
+        className="md:w-15 md:h-15 w-6 h-6"
       />
       <h2
         className={cn(

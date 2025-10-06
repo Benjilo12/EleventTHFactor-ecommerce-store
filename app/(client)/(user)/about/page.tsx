@@ -8,7 +8,7 @@ export default function Aboutpage() {
       <div>
         <TopBanner title="About us" />
       </div>
-      <Container className="h-screen max-w-5xl lg:px-8 py-16 mb-35 md:mb-0">
+      <Container className=" max-w-5xl lg:px-8 py-16 mb-35 md:mb-0">
         <h1 className="text-3xl font-bold mb-6">About ElventhFactor</h1>
         <p className="mb-4 leading-8">
           At EleventTHFactor, we believe that fashion is more than just

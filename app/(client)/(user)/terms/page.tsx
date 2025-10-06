@@ -6,7 +6,7 @@ export default function Termspage() {
   return (
     <>
       <TopBanner title="Terms & Conditions" />
-      <Container className="max-w-3xl sm:px-6 lg:px-8 h-[80vh] py-12">
+      <Container className="max-w-3xl sm:px-6 lg:px-8  py-12">
         <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
         <div className="space-y-4">
           <section>
