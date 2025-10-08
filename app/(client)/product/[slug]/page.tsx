@@ -28,7 +28,7 @@ export default async function SingleProductPage({
   }
 
   // Use environment variable for domain or fallback
-  const domain = process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com";
+  const domain = process.env.NEXT_PUBLIC_SITE_URL || "www.eleventhfactor.com";
   const productUrl = `${domain}/product/${slug}`;
   const whatsappMessage = `Hi, I'm interested in the product "${product.name}". Here's the link: ${productUrl}`;
   const whatsappLink = `https://wa.me/233265056031?text=${encodeURIComponent(whatsappMessage)}`;
