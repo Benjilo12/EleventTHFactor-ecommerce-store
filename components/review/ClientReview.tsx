@@ -59,25 +59,25 @@ export default function ClientReview() {
           <ReviewCard
             reviewTitle="Great work!"
             username="Dickson Asare"
-            userImage="/c1.png"
+            userImage="/ato.jpg"
             reviewText="The craftsmanship on my custom Kaftan was exceptional! Every stitch felt like it had a purpose. I'll definitely be ordering again for special events."
           />
           <ReviewCard
             reviewTitle="Creative and elegant"
-            username="Jane Lewis"
-            userImage="/c1.png"
+            username="Ferguson Asiam"
+            userImage="/fege.jpg"
             reviewText="Absolutely loved the bespoke coat I ordered. The design was modern yet timeless. You can tell this designer truly understands fashion."
           />
           <ReviewCard
             reviewTitle="Awesome experience!"
-            username="David Peters"
-            userImage="/c1.png"
+            username="Daniel Agbemavi"
+            userImage="/dani.jpg"
             reviewText="From the online shopping experience to the final fit, everything was smooth. The casual set I got is now my go-to weekend outfit. Super comfy!"
           />
           <ReviewCard
             reviewTitle="Stylish and professional"
-            username="Amina Yusuf"
-            userImage="/c1.png"
+            username="Godfred Mireku"
+            userImage="/man1.jpg"
             reviewText="I ordered two Kaftans for a wedding and got so many compliments. The fabric, the finish — everything was on point. Highly recommended!"
           />
         </Carousel>

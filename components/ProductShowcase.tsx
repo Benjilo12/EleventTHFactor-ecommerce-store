@@ -17,7 +17,7 @@ export default function ProductShowcase() {
         {/* Left Text Section */}
         <div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
-            Explore EleventTHFactor
+            Explore EleventhFactor
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-8">
             Step into a world where contemporary fashion meets timeless

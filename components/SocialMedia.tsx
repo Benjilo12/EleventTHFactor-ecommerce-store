@@ -24,7 +24,7 @@ const socialLink = [
   },
   {
     title: "Facebook",
-    href: "http://www.Facebook.com",
+    href: "https://www.facebook.com/share/19oX8H6Me8/?mibextid=wwXIfr",
     Icon: <FacebookIcon className="w-5 h-5" />,
   },
 ];
