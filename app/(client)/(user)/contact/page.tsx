@@ -161,7 +161,7 @@ export default function Contactpage() {
                 <strong>Email:</strong> info@eleventhfactor.com
               </p>
               <p className="text-gray-600">
-                <strong>Phone:</strong> +233 26 505 6031
+                <strong>Phone:</strong> +233 26 505 6031/+233 55 253 423
               </p>
               <p className="text-gray-600">
                 <strong>Address:</strong> Accra, Ghana
