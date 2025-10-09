@@ -2,6 +2,12 @@ import Container from "@/components/Container";
 import TopBanner from "@/components/TopBanner";
 import React from "react";
 
+export const metadata = {
+  title: "Privacy Policy",
+  description:
+    "Read EleventhFactor's Privacy Policy to understand how we collect, use, and protect your personal information.",
+};
+
 export default function Privacypage() {
   return (
     <>

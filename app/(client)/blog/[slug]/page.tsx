@@ -5,11 +5,32 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
+import type { Metadata } from "next";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>; // ✅ Fix: params is a Promise
 };
 
+// ✅ Fix: Await params
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
+
+  if (!blog) return { title: "Not Found" };
+
+  return {
+    title: blog.title || "Blog Details",
+    description:
+      blog.smallDescription || "Fashion blog article from EleventhFactor",
+    openGraph: {
+      images: blog.titleImage
+        ? [urlFor(blog.titleImage).width(1200).height(630).url()]
+        : [],
+    },
+  };
+}
+
+// ✅ Fix: Await params in the component
 export default async function BlogSlugPage({ params }: Props) {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
@@ -77,7 +98,6 @@ export default async function BlogSlugPage({ params }: Props) {
             [&>em]:italic
           "
         >
-          {/* ✅ Add null/empty check for blog.content */}
           {blog.content &&
           Array.isArray(blog.content) &&
           blog.content.length > 0 ? (

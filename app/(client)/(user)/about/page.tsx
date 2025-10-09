@@ -1,6 +1,13 @@
 import Container from "@/components/Container";
 import TopBanner from "@/components/TopBanner";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn more about EleventhFactor, our story, mission, and the values that drive us to create unique fashion pieces.",
+};
 
 export default function Aboutpage() {
   return (

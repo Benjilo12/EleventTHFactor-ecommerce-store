@@ -1,48 +1,37 @@
-"use client";
-
-import React from "react";
+// app/(client)/faq/page.tsx
+import type { Metadata } from "next";
 import Container from "@/components/Container";
-import Title from "@/components/Title";
 import TopBanner from "@/components/TopBanner";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import FaqClient from "@/components/FaqClient";
 
-import { faqsData } from "@/constant";
+export const metadata: Metadata = {
+  title: "FAQs - EleventhFactor",
+  description:
+    "Find answers to common questions about EleventhFactor, our products, shipping, returns, payments, and customer support.",
+  keywords: [
+    "FAQ",
+    "frequently asked questions",
+    "help",
+    "support",
+    "shipping",
+    "returns",
+    "payments",
+    "EleventhFactor",
+  ],
+  openGraph: {
+    title: "FAQs - EleventhFactor",
+    description:
+      "Find answers to common questions about EleventhFactor products and services",
+    type: "website",
+  },
+};
 
 export default function Faqspage() {
   return (
     <>
       <TopBanner title="FAQ" />
-
-      <Container className="max-w-4xl sm:px-6 lg:px-8 py-12 ">
-        <Title className="text-3xl mt-6">Frequently Asked Questions</Title>
-
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full mt-6 space-y-4"
-          defaultValue="item-0"
-        >
-          {faqsData?.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="group border-b border-gray-200 pb-4"
-            >
-              <AccordionTrigger className="flex items-center justify-between w-full text-left text-lg font-semibold text-black/80 group-hover:text-black hover:no-underline transition-all">
-                <span>{faq.question}</span>
-              </AccordionTrigger>
-
-              <AccordionContent className="text-gray-600 mt-2">
-                {faq?.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+      <Container className="flex justify-center items-center">
+        <FaqClient />
       </Container>
     </>
   );

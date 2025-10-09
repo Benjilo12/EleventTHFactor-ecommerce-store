@@ -2,6 +2,12 @@ import Container from "@/components/Container";
 import TopBanner from "@/components/TopBanner";
 import React from "react";
 
+export const metadata = {
+  title: "Terms & Conditions ",
+  description:
+    "Read EleventhFactor's Terms and Conditions to understand the rules and regulations for using our services.",
+};
+
 export default function Termspage() {
   return (
     <>

@@ -1,3 +1,5 @@
+// app/(client)/product/[slug]/page.tsx
+
 import AddToCartButton from "@/components/AddToCartButton";
 import Container from "@/components/Container";
 import ImageView from "@/components/ImageView";
@@ -13,13 +15,49 @@ import {
 } from "lucide-react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { urlFor } from "@/sanity/lib/image";
 
+// ✅ Dynamic metadata per product
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const product = await getProductBySlug(slug);
+
+  if (!product) return { title: "Product Not Found" };
+
+  return {
+    title: product.name || "Product Details",
+    description:
+      product.description ||
+      "Discover detailed information about our products at EleventhFactor.",
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: product.images?.length
+        ? [
+            {
+              url: urlFor(product.images[0]).width(1200).height(630).url(),
+              width: 1200,
+              height: 630,
+              alt: product.name,
+            },
+          ]
+        : [],
+    },
+  };
+}
+
+// ✅ Page component
 export default async function SingleProductPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // Await the params promise first
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
@@ -27,11 +65,13 @@ export default async function SingleProductPage({
     return notFound();
   }
 
-  // Use environment variable for domain or fallback
-  const domain = process.env.NEXT_PUBLIC_SITE_URL || "www.eleventhfactor.com";
+  const domain =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.eleventhfactor.com";
   const productUrl = `${domain}/product/${slug}`;
   const whatsappMessage = `Hi, I'm interested in the product "${product.name}". Here's the link: ${productUrl}`;
-  const whatsappLink = `https://wa.me/233265056031?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappLink = `https://wa.me/233265056031?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
 
   return (
     <Container className="py-10 flex flex-col md:flex-row gap-10 overflow-hidden">
@@ -65,7 +105,6 @@ export default async function SingleProductPage({
           />
         </div>
 
-        {/* WhatsApp Button */}
         <Link
           href={whatsappLink}
           target="_blank"
