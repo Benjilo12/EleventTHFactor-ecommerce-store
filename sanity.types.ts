@@ -245,6 +245,15 @@ export type SanityAssetSourceData = {
 export type AllSanitySchemaTypes = Blog | Product | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/helpers/queries.tsx
+// Variable: PRODUCTS_QUERY
+// Query: *[_type == "product"] | order(_createdAt desc) {      _id,      name,      "slug": slug.current, // ✅ This ensures we get the string value      _updatedAt,      _createdAt    }
+export type PRODUCTS_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: string | null;
+  _updatedAt: string;
+  _createdAt: string;
+}>;
 // Variable: PRODUCT_BY_SLUG_QUERY
 // Query: *[_type == 'product' && slug.current == $slug] | order(name asc) [0]
 export type PRODUCT_BY_SLUG_QUERYResult = {
@@ -387,6 +396,7 @@ export type ORDERS_BY_CLERK_USER_ID_QUERYResult = Array<never>;
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[_type == \"product\"] | order(_createdAt desc) {\n      _id,\n      name,\n      \"slug\": slug.current, // \u2705 This ensures we get the string value\n      _updatedAt,\n      _createdAt\n    }": PRODUCTS_QUERYResult;
     "*[_type == 'product' && slug.current == $slug] | order(name asc) [0]": PRODUCT_BY_SLUG_QUERYResult;
     "*[_type==\"category\"] | order(name desc)": CATEGORIES_QUERYResult;
     "*[_type == \"blog\"] | order(publishedAt desc) {\n      _id,\n      title,\n      slug,\n      titleImage,\n      smallDescription,\n      publishedAt,\n      tags,\n      relatedProducts[]->{\n        _id,\n        title\n      }\n    }": BLOGS_QUERYResult;

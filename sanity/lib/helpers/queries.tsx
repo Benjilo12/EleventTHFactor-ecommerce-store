@@ -1,6 +1,30 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "../live";
 
+// Temporary fix - modify your existing function
+// Add this function to your queries file
+// Even better - explicitly get the slug current value
+export const getAllProducts = async () => {
+  const PRODUCTS_QUERY = defineQuery(
+    `*[_type == "product"] | order(_createdAt desc) {
+      _id,
+      name,
+      "slug": slug.current, // ✅ This ensures we get the string value
+      _updatedAt,
+      _createdAt
+    }`
+  );
+  try {
+    const products = await sanityFetch({
+      query: PRODUCTS_QUERY,
+    });
+    return products.data || [];
+  } catch (error) {
+    console.error("Error fetching all products", error);
+    return [];
+  }
+};
+
 export const getProductBySlug = async (slug: string) => {
   const PRODUCT_BY_SLUG_QUERY = defineQuery(
     `*[_type == 'product' && slug.current == $slug] | order(name asc) [0]`
