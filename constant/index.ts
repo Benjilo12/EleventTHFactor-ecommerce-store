@@ -3,12 +3,12 @@ export const headerData = [
   { title: "Men", href: "/men" },
   { title: "Kaftan", href: "/kaftan" },
   { title: "Featured", href: "/featured" },
-  { title: "Coats", href: "/coats" },
+  { title: "Suits", href: "/suits" },
   { title: "Casual-Wear", href: "/casual" },
 ];
 
 export const productType = [
-  { title: "Coats", value: "coats" },
+  { title: "Suits", value: "suits" },
   { title: "Kaftan", value: "kaftan" },
   { title: "CasualWear", value: "casualwear" },
   { title: "Agbada", value: "agbada" },
@@ -26,7 +26,7 @@ export const quickLinksData = [
 export const categoriesData = [
   { title: "Men's Fashion", href: "/men" },
   { title: "Kaftan", href: "/kaftan" },
-  { title: "Coats", href: "/coat" },
+  { title: "Suits", href: "/suits" },
   { title: "Casual-Wear", href: "/casual-wear" },
   { title: "others", href: "/others" },
 ];

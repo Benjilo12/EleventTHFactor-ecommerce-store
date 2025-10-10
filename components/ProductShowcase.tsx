@@ -33,7 +33,7 @@ export default function ProductShowcase() {
           {/* Top Left Text Box */}
           <div className="bg-gray-100 dark:bg-gray-800 flex flex-col justify-center items-center p-6 text-center">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white">
-              Coat
+              Suit
             </h3>
             <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
               Latest Collection

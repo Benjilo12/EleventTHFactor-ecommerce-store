@@ -16,7 +16,7 @@ export default function NoAccessToCart() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex justify-center">
-            <Logo>EleventTHFactor</Logo>
+            <Logo>EleventhFactor</Logo>
           </div>
           <CardTitle className="text-2xl font-bold flex justify-center">
             Welcome Back!
