@@ -14,7 +14,7 @@ interface Props {
   slug: string;
 }
 
-const PRODUCTS_PER_PAGE = 10;
+const PRODUCTS_PER_PAGE = 12;
 
 export default function CategoryProduct({ categories, slug }: Props) {
   const [currentSlug, setCurrentSlug] = useState(slug);

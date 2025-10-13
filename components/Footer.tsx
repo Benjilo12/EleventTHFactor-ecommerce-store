@@ -130,7 +130,7 @@ export default function Footer() {
                 Terms of Service
               </Link>
               <Link
-                href="/faq"
+                href="/faqs"
                 className="text-gray-500 hover:text-black text-sm transition-colors"
               >
                 FAQs

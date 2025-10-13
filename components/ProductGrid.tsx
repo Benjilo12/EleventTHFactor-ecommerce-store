@@ -15,7 +15,7 @@ export default function ProductGrid() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const query = `*[_type == 'product' && variant ==$variant] | order(name desc)`;
+    const query = `*[_type == 'product' && variant ==$variant] | order(name desc)[0..7]`;
     const params = { variant: selectedTab.toLocaleLowerCase() };
 
     const fetchData = async () => {
