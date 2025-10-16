@@ -14,15 +14,14 @@ const raleway = localFont({
 });
 
 const siteUrl = "https://www.eleventhfactor.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl), // ✅ Required to resolve relative OG/Twitter image URLs
+  metadataBase: new URL(siteUrl),
   title: {
     default: "EleventhFactor",
     template: "%s | EleventhFactor",
   },
   description:
-    "we all cυт ғroм a dιғғerenт cloтн and тo ѕυrvιve ,don'т wear yoυr нearт on yoυr ѕleeve ",
+    "Premium fashion brand offering kaftans, suits, and urban style clothing. Unique designs that celebrate individuality and ethical fashion in Ghana.",
   keywords: [
     "EleventhFactor",
     "fashion",
@@ -33,6 +32,14 @@ export const metadata: Metadata = {
     "ethical fashion",
     "modern wear",
   ],
+  robots: {
+    index: true,  // ✅ IMPORTANT: Explicitly allow indexing
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -40,15 +47,21 @@ export const metadata: Metadata = {
     siteName: "EleventhFactor",
     title: "EleventhFactor",
     description:
-      "We all cut from a different cloth — to survive, don't wear your heart on your sleeve.",
+      "Premium fashion brand offering kaftans, suits, and urban style clothing",
     images: [
       {
-        url: "/opengraph-image.png", // ✅ Now safe to use relative path
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "EleventhFactor Clothing",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EleventhFactor",
+    description: "Premium fashion brand offering kaftans, suits, and urban style clothing",
+    images: ["/opengraph-image.png"],
   },
 };
 
