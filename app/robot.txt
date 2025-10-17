@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/admin/", "/studio/", "/_next/"],
+      disallow: [ "/cart", "/studio/", "/_next/"],
     },
     sitemap: "https://www.eleventhfactor.com/sitemap.xml",
   };
